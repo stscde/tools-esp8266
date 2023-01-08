@@ -35,7 +35,7 @@ void setup() {
                         Adafruit_BME280::SAMPLING_X1,  // pressure
                         Adafruit_BME280::SAMPLING_X1,  // humidity
                         Adafruit_BME280::FILTER_OFF);
-        
+
         // recommended delay for weather monitoring
         DELAY = 60000;
     }
@@ -46,10 +46,12 @@ void setup() {
 // ##########################################
 
 void loop() {
-    // Only needed in forced mode! In normal mode, you can remove the next line.
-    //    boolean measureOk = bme.takeForcedMeasurement(); // has no effect in normal mode
-    //    Serial.print("measure ok: ");
-    //    Serial.println(measureOk);
+    if (SET_PROFILE_WEATHER) {
+        // Only needed in forced mode! In normal mode, you can remove the next line.
+        boolean measureOk = bme.takeForcedMeasurement();  // has no effect in normal mode
+        Serial.print("measure ok: ");
+        Serial.println(measureOk);
+    }
 
     Serial.print("temp: ");
     Serial.println(bme.readTemperature());
